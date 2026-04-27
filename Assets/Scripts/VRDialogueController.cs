@@ -15,6 +15,7 @@ public class VRDialogueController : MonoBehaviour
     [Header("Riferimenti UI (World Space)")]
     public GameObject canvasDialogo;
     public TextMeshProUGUI textMesh;
+    public TextMeshProUGUI textMeshHint;
     public GameObject hintTasto;
 
     [Header("Input (Nuovo Sistema)")]
@@ -70,7 +71,11 @@ public class VRDialogueController : MonoBehaviour
             Debug.Log($"[{gameObject.name}] Il Player è ENTRATO nell'area di trigger.");
 
             if (isAutomaticZone) StartDialogue();
-            else if (hintTasto) hintTasto.SetActive(true);
+            else if (hintTasto)
+            {
+                hintTasto.SetActive(true); 
+                textMeshHint.text = interactAction.GetBindingDisplayString(0) + " | " + interactAction.GetBindingDisplayString(1);
+            }
         }
     }
 

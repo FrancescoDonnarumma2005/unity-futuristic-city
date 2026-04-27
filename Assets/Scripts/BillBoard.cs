@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BillBoard : MonoBehaviour
 {
-    private Transform mainCameraTransform;
+    [SerializeField] private Transform mainCameraTransform;
 
     void Start()
     {

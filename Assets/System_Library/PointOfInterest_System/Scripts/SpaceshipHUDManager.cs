@@ -32,7 +32,7 @@ public class SpaceshipHUDManager : MonoBehaviour
             uiPanel.SetActive(true);
             if (titleText != null) titleText.text = data.title;
 
-            // Cicliamo attraverso tutte le frasi (proprio come nel tuo script originale)
+            // Cicliamo attraverso tutte le frasiS
             for (int i = 0; i < data.dialogueLines.Length; i++)
             {
                 // Controllo sicurezza: l'oggetto è stato distrutto o la comunicazione annullata?

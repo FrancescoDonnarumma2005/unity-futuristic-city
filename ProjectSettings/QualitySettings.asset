@@ -338,7 +338,7 @@ QualitySettings:
     Stadia: 5
     Standalone: 5
     VisionOS: 0
-    WebGL: 3
+    WebGL: 1
     Windows Store Apps: 5
     XboxOne: 5
     iPhone: 2

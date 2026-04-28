@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Anchor
   - Ground
+  - Spaceship
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Object
   - Water
   - UI
   - 

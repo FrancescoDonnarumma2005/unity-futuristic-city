@@ -2,6 +2,7 @@ using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Threading;
+using UnityEngine.Events; // Necessario per gli eventi
 
 public class SpaceshipController : MonoBehaviour
 {
@@ -40,6 +41,9 @@ public class SpaceshipController : MonoBehaviour
     public Transform leftExitTarget;
     [Tooltip("Il Transform all'esterno della porta DESTRA")]
     public Transform rightExitTarget;
+
+    [Header("Eventi Missione")]
+    public UnityEvent onEnterSpaceship; // Questo evento scatterà quando entri  
 
     private bool isPiloting = false;
     private bool isTransitioning = false; // <-- Sicurezza per bloccare interazioni in uscita
@@ -119,6 +123,7 @@ public class SpaceshipController : MonoBehaviour
         }
 
         Debug.Log("Giocatore entrato nella navicella con successo!");
+        onEnterSpaceship?.Invoke();
     }
 
     private void Update()

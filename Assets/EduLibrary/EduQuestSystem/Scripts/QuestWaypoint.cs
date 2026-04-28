@@ -85,8 +85,8 @@ namespace EduUtils.QuestSystem
         {
             if (!canCompleteCurrent) return;
 
-            // Assicurati che il controller del giocatore abbia il tag "Player"
-            if (other.CompareTag("Player")) 
+            // Assicurati che il controller del giocatore abbia il tag "Player" o "Spaceship"
+            if (other.CompareTag("Player") || other.CompareTag("Spaceship")) 
             {
                 onPlayerArrivedInZone?.Invoke();
 

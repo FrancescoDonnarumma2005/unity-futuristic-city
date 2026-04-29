@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Threading;
-using UnityEngine.Events; // Necessario per gli eventi
+using UnityEngine.Events;
 
 public class DesktopSpaceshipController : MonoBehaviour
 {
@@ -23,16 +23,20 @@ public class DesktopSpaceshipController : MonoBehaviour
     [Header("Controlli (Configurabili da Inspector)")]
     [Tooltip("Azione Movimento: WASD (Tipo: Value, Vector2)")]
     public InputAction moveAction;
-    
+
     [Tooltip("Azione Verticale: Space/F (Tipo: Value, Axis)")]
     public InputAction verticalAction;
-    
-    [Tooltip("Azione Imbardata: Q/E (Tipo: Value, Axis)")]
+
+    [Tooltip("Azione Imbardata (Destra/Sinistra): Q/E (Tipo: Value, Axis)")]
     public InputAction yawAction;
-    
+
+    // NUOVO: Azione per il Beccheggio (Su/Giù)
+    [Tooltip("Azione Beccheggio (Su/Giù): Shift/Ctrl (Tipo: Value, Axis)")]
+    public InputAction pitchAction;
+
     [Tooltip("Azione Entra: E (Tipo: Button)")]
     public InputAction enterAction;
-    
+
     [Tooltip("Azione Esci: ESC (Tipo: Button)")]
     public InputAction exitAction;
 
@@ -47,7 +51,7 @@ public class DesktopSpaceshipController : MonoBehaviour
     public Transform leftExitTarget;
 
     [Header("Eventi Missione")]
-    public UnityEvent onEnterSpaceship; // Questo evento scatterà quando entri
+    public UnityEvent onEnterSpaceship;
 
     private bool isPiloting = false;
     private bool isTransitioning = false;
@@ -56,7 +60,7 @@ public class DesktopSpaceshipController : MonoBehaviour
     private Transform originalCameraParent;
     private Vector3 originalCameraLocalPos;
     private Rigidbody rb;
-    
+
     private float cockpitPitch = 0f;
     private float cockpitYaw = 0f;
 
@@ -66,6 +70,7 @@ public class DesktopSpaceshipController : MonoBehaviour
         moveAction.Enable();
         verticalAction.Enable();
         yawAction.Enable();
+        pitchAction.Enable(); // NUOVO: Abilitiamo la nuova azione
         enterAction.Enable();
         exitAction.Enable();
     }
@@ -75,6 +80,7 @@ public class DesktopSpaceshipController : MonoBehaviour
         moveAction.Disable();
         verticalAction.Disable();
         yawAction.Disable();
+        pitchAction.Disable(); // NUOVO: Disabilitiamo la nuova azione
         enterAction.Disable();
         exitAction.Disable();
     }
@@ -89,7 +95,7 @@ public class DesktopSpaceshipController : MonoBehaviour
             rb.useGravity = false;
             rb.isKinematic = false;
             rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
-            rb.freezeRotation = true; 
+            rb.freezeRotation = true;
         }
 
         if (playerCamera == null) playerCamera = Camera.main;
@@ -108,7 +114,6 @@ public class DesktopSpaceshipController : MonoBehaviour
         // --- A PIEDI ---
         if (!isPiloting)
         {
-            // Se premo il tasto per entrare...
             if (enterAction.WasPressedThisFrame() && playerCamera != null)
             {
                 Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
@@ -135,7 +140,7 @@ public class DesktopSpaceshipController : MonoBehaviour
         {
             Vector2 mouseDelta = Mouse.current.delta.ReadValue();
             cockpitYaw += mouseDelta.x * mouseSensitivity;
-            cockpitPitch -= mouseDelta.y * mouseSensitivity; 
+            cockpitPitch -= mouseDelta.y * mouseSensitivity;
 
             cockpitPitch = Mathf.Clamp(cockpitPitch, maxLookUp, maxLookDown);
             cockpitYaw = Mathf.Clamp(cockpitYaw, -maxLookSide, maxLookSide);
@@ -149,23 +154,20 @@ public class DesktopSpaceshipController : MonoBehaviour
         if (rb == null || !isPiloting || isTransitioning) return;
 
         // 1. Lettura dinamica degli Input
-        Vector2 moveInput = moveAction.ReadValue<Vector2>(); 
-        float verticalInput = verticalAction.ReadValue<float>(); 
-        float yawInput = yawAction.ReadValue<float>(); 
+        Vector2 moveInput = moveAction.ReadValue<Vector2>();
+        float verticalInput = verticalAction.ReadValue<float>();
+        float yawInput = yawAction.ReadValue<float>();
+        float pitchInput = pitchAction.ReadValue<float>(); // NUOVO: Leggiamo l'input di Shift/Ctrl
 
         Vector3 localMove;
 
-        // 2. Correzione degli Assi (La magia per aggirare il problema di Blender)
+        // 2. Correzione degli Assi
         if (fixBlenderAxes)
         {
-            // Se la nave ha la Z in alto:
-            // L'Avanti di Unity (Y nel joystick) diventa la Y del modello.
-            // Il Su/Giù di Unity (verticalInput) diventa la Z del modello.
             localMove = new Vector3(moveInput.x, moveInput.y, verticalInput);
         }
         else
         {
-            // Assi Standard di Unity: Y è Su/Giù, Z è Avanti/Indietro.
             localMove = new Vector3(moveInput.x, verticalInput, moveInput.y);
         }
 
@@ -173,15 +175,23 @@ public class DesktopSpaceshipController : MonoBehaviour
         Vector3 worldMove = transform.TransformDirection(localMove);
         rb.linearVelocity = worldMove * moveSpeed;
 
-        // 4. Applicazione della Rotazione (Senza Rollio)
-        if (Mathf.Abs(yawInput) > 0.01f)
+        // 4. Applicazione della Rotazione (Yaw e Pitch combinati)
+        if (Mathf.Abs(yawInput) > 0.01f || Mathf.Abs(pitchInput) > 0.01f)
         {
             float yawAmount = yawInput * rotationSpeed * Time.fixedDeltaTime;
-            
-            // Se la navicella di Blender è "sdraiata", l'asse su cui girare il muso è la Z (forward di Unity)
-            Vector3 rotationAxis = fixBlenderAxes ? Vector3.forward : Vector3.up;
-            
-            rb.MoveRotation(rb.rotation * Quaternion.Euler(rotationAxis * yawAmount));
+            float pitchAmount = pitchInput * rotationSpeed * Time.fixedDeltaTime; // Usiamo la stessa rotationSpeed
+
+            // Asse di imbardata (Destra/Sinistra)
+            Vector3 yawAxis = fixBlenderAxes ? Vector3.forward : Vector3.up;
+
+            // Asse di beccheggio (Su/Giù) -> È sempre l'asse X (Right) sia in Unity che in Blender
+            Vector3 pitchAxis = Vector3.right;
+
+            // Creiamo i due quaternioni di rotazione e li applichiamo
+            Quaternion yawRot = Quaternion.Euler(yawAxis * yawAmount);
+            Quaternion pitchRot = Quaternion.Euler(pitchAxis * pitchAmount);
+
+            rb.MoveRotation(rb.rotation * yawRot * pitchRot);
         }
         else
         {
@@ -196,7 +206,7 @@ public class DesktopSpaceshipController : MonoBehaviour
 
         playerCamera.transform.SetParent(cockpitCameraMount, false);
         playerCamera.transform.localPosition = Vector3.zero;
-        
+
         cockpitPitch = 0f;
         cockpitYaw = 0f;
         playerCamera.transform.localRotation = Quaternion.identity;
@@ -220,7 +230,7 @@ public class DesktopSpaceshipController : MonoBehaviour
 
         isTransitioning = true;
         isPiloting = false;
-        
+
         await LevelOutSpaceshipAsync(destroyCancellationToken);
 
         if (playerRoot != null)

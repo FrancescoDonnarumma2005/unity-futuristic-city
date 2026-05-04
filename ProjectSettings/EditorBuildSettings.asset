@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CyberCity.unity
     guid: c224a272a4be6c6428cb5ed452dca7c5
+  - enabled: 0
+    path: Assets/Scenes/TestBuild.unity
+    guid: 93ee013113c06134ba0f1f4d5062d533
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}
@@ -22,4 +25,3 @@ EditorBuildSettings:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 1a4c68ca72a83449f938d669337cb305, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: a9a6963505ddf7f4d886008c6dc86122, type: 2}
     xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: f703781ed2022394f8cd9ba7d64ee982, type: 2}
-  m_UseUCBPForAssetBundles: 0

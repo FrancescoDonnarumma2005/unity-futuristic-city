@@ -288,11 +288,11 @@ public class DesktopSpaceshipController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground") && isPiloting) isGrounded = true;
+        if (collision.gameObject.CompareTag("Ground") && isPiloting) isGrounded = true; Debug.Log("sto a terra");
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground") && isPiloting) isGrounded = false;
+        if (collision.gameObject.CompareTag("Ground") && isPiloting) isGrounded = false; Debug.Log("sto in cielo");
     }
 }

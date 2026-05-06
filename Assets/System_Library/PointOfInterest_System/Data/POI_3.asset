@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: POI_3
   m_EditorClassIdentifier: Assembly-CSharp::FuturisticCity.EduLibrary.POI.POIDataSO
   title: Comunicazione Radio
-  dialogueLines: []
+  dialogueLines:
+  - "Oltre alcuni punti la navicella non andr\xE0 oltre,"
+  - ci sono posti che nonostante il passare del tempo, rimangono troppo pericolosi
+    da esplorare
+  - "Futuro non sempre significa pi\xF9 sicuro!"
   timePerLine: 3.5

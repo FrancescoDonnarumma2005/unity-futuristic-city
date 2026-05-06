@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FuturisticCity.EduLibrary.POI.POIDataSO
   title: 
   dialogueLines:
-  - Riga di prova 1
-  - Riga di prova 2
-  - Riga di prova 3
+  - "Questo \xE8 il garage dove sono stato costruito,"
+  - "il mio costruttore \xE8 morto lasciandomi tutte le sue conoscenze, "
+  - grazie alle quali ho progettato questa navicella.
+  - Attenzione a non schiantarti!
   timePerLine: 3.5

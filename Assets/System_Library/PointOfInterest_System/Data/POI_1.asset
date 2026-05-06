@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FuturisticCity.EduLibrary.POI.POIDataSO
   title: 
   dialogueLines:
-  - Riga di prova 1
-  - Riga di prova 2
-  - Riga di prova 3
+  - "Questo \xE8 il centro della citt\xE0,"
+  - "da qui puoi vedere tutto ci\xF2 che ti riserva utopia"
+  - sei libero di esplorare quello che vuoi
   timePerLine: 3.5

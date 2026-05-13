@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace EduUtils.QuestSystem // Namespace per proteggere il codice
+namespace EduUtils.QuestSystem
 {
     [CreateAssetMenu(fileName = "NewQuestStep", menuName = "EduQuest/Quest Step")]
     public class QuestStepSO : ScriptableObject
@@ -14,13 +14,14 @@ namespace EduUtils.QuestSystem // Namespace per proteggere il codice
         public Sprite icon; // Icona generica per la UI
 
         [Header("Comportamento UI Libreria")]
-    [Tooltip("Se disattivato, nasconde la dicitura 'MISSIONE X' ed è considerata un passaggio intermedio.")]
-    public bool isMainQuest = true;
-    
-    [Tooltip("Se disattivato, non mostra il popup 'Missione Completata' al termine di questo step.")]
-    public bool showCompletionPopup = true;
+        [Tooltip("Se disattivato, nasconde la dicitura 'MISSIONE X' ed è considerata un passaggio intermedio.")]
+        public bool isMainQuest = true;
+        
+        [Tooltip("Se disattivato, non mostra il popup 'Missione Completata' al termine di questo step.")]
+        public bool showCompletionPopup = true;
 
-    [Tooltip("Testo personalizzato per il completamento. Se vuoto, usa il default 'MISSIONE COMPLETATA'.")]
-    public string customCompletionText = "";
+        // ECCO LA VARIABILE CHE MANCAVA E CHE CAUSAVA L'ERRORE:
+        [Tooltip("Testo personalizzato per il completamento. Se vuoto, usa il default 'MISSIONE COMPLETATA'.")]
+        public string customCompletionText = "";
     }
 }

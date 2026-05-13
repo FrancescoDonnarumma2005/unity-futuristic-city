@@ -9137,6 +9137,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
+  m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -9487,8 +9488,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EduUtils.QuestSystem.QuestWaypoint
   visibleDuringQuests:
   - {fileID: 11400000, guid: 2e20df88f104e514cb5a43c3c869e34e, type: 2}
+  - {fileID: 11400000, guid: def3ac97abdd49c46b3141ed36c69558, type: 2}
   visualEffectsParent: {fileID: 262391180}
-  questToComplete: {fileID: 11400000, guid: 2e20df88f104e514cb5a43c3c869e34e, type: 2}
+  questToComplete: {fileID: 11400000, guid: def3ac97abdd49c46b3141ed36c69558, type: 2}
   autoCompleteOnEnter: 1
   onWaypointActivated:
     m_PersistentCalls:
@@ -376010,6 +376012,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
+  m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -377991,7 +377994,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1390104100}
   m_Enabled: 1
-  serializedVersion: 12
+  serializedVersion: 13
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.1
@@ -378043,7 +378046,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShadowRadius: 0
+  m_ShapeRadius: 0
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -382456,8 +382459,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EduUtils.QuestSystem.QuestWaypoint
   visibleDuringQuests:
   - {fileID: 11400000, guid: 2e20df88f104e514cb5a43c3c869e34e, type: 2}
+  - {fileID: 11400000, guid: def3ac97abdd49c46b3141ed36c69558, type: 2}
+  - {fileID: 11400000, guid: ff4a1982695be894da055f8847130c9b, type: 2}
   visualEffectsParent: {fileID: 967327715}
-  questToComplete: {fileID: 11400000, guid: 2e20df88f104e514cb5a43c3c869e34e, type: 2}
+  questToComplete: {fileID: 11400000, guid: ff4a1982695be894da055f8847130c9b, type: 2}
   autoCompleteOnEnter: 1
   onWaypointActivated:
     m_PersistentCalls:
@@ -383571,7 +383576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5055047996348649243, guid: 3fde55e21af94e641b3ff220e0a6dce2, type: 3}
       propertyPath: 'lines.Array.data[0]'
-      value: "Ciao Alex Benvenuto nel 3026, questa \xE8 Utopia."
+      value: "Ciao Alex Benvenuto nel 2526, questa \xE8 Utopia."
       objectReference: {fileID: 0}
     - target: {fileID: 5055047996348649243, guid: 3fde55e21af94e641b3ff220e0a6dce2, type: 3}
       propertyPath: 'lines.Array.data[1]'
@@ -384135,6 +384140,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7ae68b868b7114e439645c6f9cd2a120, type: 2}
   - {fileID: 11400000, guid: 866fc671f8a443444b63e99100067473, type: 2}
   - {fileID: 11400000, guid: 2e20df88f104e514cb5a43c3c869e34e, type: 2}
+  - {fileID: 11400000, guid: def3ac97abdd49c46b3141ed36c69558, type: 2}
+  - {fileID: 11400000, guid: ff4a1982695be894da055f8847130c9b, type: 2}
   currentIndex: -1
 --- !u!114 &1939829598
 MonoBehaviour:

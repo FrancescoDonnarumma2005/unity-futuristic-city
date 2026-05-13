@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mission_1
   m_EditorClassIdentifier: Assembly-CSharp::EduUtils.QuestSystem.QuestStepSO
   id: quest_01
-  title: L'arrivo a NightCity
+  title: L'arrivo ad Utopia
   description: Parla con Cristian
   icon: {fileID: 0}
   isMainQuest: 1

@@ -24,6 +24,9 @@ namespace EduUtils.QuestSystem
         public UnityEvent onPlayerArrivedInZone;
 
         private bool canCompleteCurrent = false;
+        
+        // NUOVO: Memoria del singolo POI per evitare che si riaccenda
+        private bool _hasBeenVisited = false; 
 
         private void Start()
         {
@@ -46,11 +49,18 @@ namespace EduUtils.QuestSystem
 
         private void HandleQuestState(QuestStepSO currentQuest)
         {
-            // NUOVO: Se riceviamo "null", significa che il gioco è finito. Spegniamo tutto!
+            // Se riceviamo "null", significa che il gioco è finito. Spegniamo tutto!
             if (currentQuest == null)
             {
                 if (visualEffectsParent != null) visualEffectsParent.SetActive(false);
                 canCompleteCurrent = false;
+                return;
+            }
+
+            // NUOVO: Se l'ho già visitato, resta spento per sempre, ignorando lo stato della missione!
+            if (_hasBeenVisited)
+            {
+                if (visualEffectsParent != null) visualEffectsParent.SetActive(false);
                 return;
             }
 
@@ -83,11 +93,18 @@ namespace EduUtils.QuestSystem
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!canCompleteCurrent) return;
+            // NUOVO: Se non posso completarla o l'ho già visitata, ignora l'ingresso
+            if (!canCompleteCurrent || _hasBeenVisited) return;
 
-            // Assicurati che il controller del giocatore abbia il tag "Player" o "Spaceship"
-            if (other.CompareTag("Player") || other.CompareTag("Spaceship")) 
+            // Assicurati che il controller del giocatore abbia il tag "Player", "Spaceship" o "Vehicle"
+            if (other.CompareTag("Player") || other.CompareTag("Spaceship") || other.CompareTag("Vehicle")) 
             {
+                // Segnalo come visitato in modo permanente!
+                _hasBeenVisited = true; 
+                
+                // Spegni IMMEDIATAMENTE la luce di questo specifico POI
+                if (visualEffectsParent != null) visualEffectsParent.SetActive(false);
+
                 onPlayerArrivedInZone?.Invoke();
 
                 if (autoCompleteOnEnter)

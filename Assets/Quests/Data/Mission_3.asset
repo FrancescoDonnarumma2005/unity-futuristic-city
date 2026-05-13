@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Mission_3
   m_EditorClassIdentifier: Assembly-CSharp::EduUtils.QuestSystem.QuestStepSO
   id: quest_03
-  title: Accendere i motori
-  description: Vola fino a raggiungere le coordinate indicate
+  title: "Esplorare la citt\xE0"
+  description: 'Vola fino a raggiungere il punto d''interesse in cima al Garage '
   icon: {fileID: 0}
   isMainQuest: 1
-  showCompletionPopup: 1
+  showCompletionPopup: 0
   customCompletionText: 

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3c6827523b59fe4f9a9d0f4e4bf2c14, type: 3}
-  m_Name: Mission_2
+  m_Name: Mission_3 1
   m_EditorClassIdentifier: Assembly-CSharp::EduUtils.QuestSystem.QuestStepSO
-  id: quest_02
-  title: Accendere i motori
-  description: Preparati a salire sulla navicella CAT-330
+  id: quest_031
+  title: "Esplorare la citt\xE0"
+  description: Vola fino a raggiungere il punto d'interesse al centro di Utopia
   icon: {fileID: 0}
-  isMainQuest: 1
-  showCompletionPopup: 1
+  isMainQuest: 0
+  showCompletionPopup: 0
   customCompletionText: 
